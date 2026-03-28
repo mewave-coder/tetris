@@ -485,6 +485,47 @@ function drawMiniPiece(c, cvs, piece) {
 function drawNext() { drawMiniPiece(nextCtx, nextCvs, next); }
 function drawHold() { drawMiniPiece(holdCtx, holdCvs, held); }
 
+// ── 터치 컨트롤 ────────────────────────────────────
+(function () {
+  let startX = 0, startY = 0, lastX = 0, accumX = 0;
+  const MOVE_PX = 28; // 한 칸 이동에 필요한 픽셀
+
+  canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    resumeAudio();
+    const t = e.changedTouches[0];
+    startX = lastX = t.clientX;
+    startY = t.clientY;
+    accumX = 0;
+  }, { passive: false });
+
+  canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (gameOver || paused) return;
+    const t = e.changedTouches[0];
+    accumX += t.clientX - lastX;
+    lastX = t.clientX;
+    if (accumX >= MOVE_PX)       { moveRight(); accumX -= MOVE_PX; }
+    else if (accumX <= -MOVE_PX) { moveLeft();  accumX += MOVE_PX; }
+  }, { passive: false });
+
+  canvas.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    if (gameOver || paused) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - startX;
+    const dy = t.clientY - startY;
+
+    if (Math.abs(dx) < 12 && Math.abs(dy) < 12) {
+      rotate();                          // 탭 → 회전
+    } else if (dy > 60 && Math.abs(dx) < 60) {
+      hardDrop();                        // 아래 스와이프 → 즉시 낙하
+    } else if (dy < -60 && Math.abs(dx) < 60) {
+      holdPiece();                       // 위 스와이프 → 홀드
+    }
+  }, { passive: false });
+})();
+
 // ── 키 입력 ────────────────────────────────────────
 document.addEventListener('keydown', (e) => {
   resumeAudio();
