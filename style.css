@@ -1,0 +1,234 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a12 100%);
+  font-family: 'Courier New', monospace;
+}
+
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+/* ── Side Panels ── */
+.side-panel {
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 4px;
+}
+
+.info-box {
+  background: linear-gradient(160deg, #1e1e32 0%, #16162a 100%);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    0 4px 12px rgba(0,0,0,0.4);
+}
+
+.label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #555580;
+  margin-bottom: 6px;
+}
+
+.value {
+  font-size: 22px;
+  font-weight: bold;
+  color: #e0e0ff;
+  letter-spacing: 1px;
+  word-break: break-all;
+}
+
+.level-value {
+  font-size: 36px;
+  color: #aaaaff;
+  text-align: center;
+}
+
+.level-bar-wrap {
+  margin-top: 8px;
+  height: 6px;
+  background: #0e0e20;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.level-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #5555cc, #aaaaff);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* ── Controls ── */
+.controls {
+  background: linear-gradient(160deg, #1e1e32 0%, #16162a 100%);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    0 4px 12px rgba(0,0,0,0.4);
+}
+
+.key-row {
+  font-size: 11px;
+  color: #7070a0;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+kbd {
+  background: #2a2a44;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 10px;
+  color: #aaaacc;
+  font-family: inherit;
+}
+
+/* ── Next / Hold Canvas ── */
+#next-canvas,
+#hold-canvas {
+  display: block;
+  margin: 6px auto 0;
+  border-radius: 6px;
+}
+
+#hold-box.used {
+  opacity: 0.45;
+}
+
+#hold-box.used .label::after {
+  content: ' (사용됨)';
+  font-size: 8px;
+  color: #444466;
+}
+
+/* ── Board ── */
+.board-wrap {
+  position: relative;
+  line-height: 0;
+}
+
+#board {
+  display: block;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 8px 32px rgba(0,0,0,0.6),
+    0 0 60px rgba(80,80,180,0.1);
+}
+
+/* ── Overlay ── */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 8, 18, 0.88);
+  backdrop-filter: blur(4px);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay-content {
+  text-align: center;
+}
+
+.overlay-title {
+  font-size: 44px;
+  font-weight: bold;
+  color: #aaaaff;
+  letter-spacing: 8px;
+  text-shadow: 0 0 30px rgba(160,160,255,0.6);
+  margin-bottom: 12px;
+}
+
+.overlay-sub {
+  font-size: 13px;
+  color: #666690;
+  letter-spacing: 1px;
+  margin-bottom: 28px;
+}
+
+.start-btn {
+  background: linear-gradient(180deg, #6666dd 0%, #4444bb 100%);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 36px;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow:
+    0 4px 0 #2222aa,
+    0 6px 16px rgba(100,100,255,0.4);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+.start-btn:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 #2222aa,
+    0 2px 8px rgba(100,100,255,0.3);
+}
+
+/* ── Level Up Notify ── */
+.levelup-notify {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: #fff;
+  background: rgba(100,100,255,0.85);
+  padding: 10px 24px;
+  border-radius: 10px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 20;
+  transition: none;
+  white-space: nowrap;
+}
+
+.levelup-notify.show {
+  animation: levelupAnim 1.2s ease forwards;
+}
+
+@keyframes levelupAnim {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+  20%  { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  40%  { transform: translate(-50%, -50%) scale(1); }
+  70%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -60%) scale(1); }
+}

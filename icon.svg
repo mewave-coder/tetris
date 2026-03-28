@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="100" fill="#0a0a1a"/>
+  <!-- 테트리스 블록 (L자형) -->
+  <rect x="136" y="136" width="80" height="80" rx="8" fill="#00cfff"/>
+  <rect x="226" y="136" width="80" height="80" rx="8" fill="#00cfff"/>
+  <rect x="316" y="136" width="80" height="80" rx="8" fill="#00cfff"/>
+  <rect x="316" y="226" width="80" height="80" rx="8" fill="#00cfff"/>
+  <!-- 테트리스 블록 (I자형) -->
+  <rect x="136" y="316" width="80" height="80" rx="8" fill="#ff0"/>
+  <rect x="136" y="226" width="80" height="80" rx="8" fill="#ff0"/>
+  <!-- 테트리스 블록 (S자형) -->
+  <rect x="226" y="316" width="80" height="80" rx="8" fill="#f80"/>
+  <rect x="226" y="226" width="80" height="80" rx="8" fill="#f80"/>
+</svg>

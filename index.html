@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>테트리스</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0a0a1a" />
+
+  <!-- iOS Safari PWA 설정 -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="테트리스" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- 왼쪽 패널 -->
+    <div class="side-panel left">
+      <div class="info-box">
+        <div class="label">SCORE</div>
+        <div class="value" id="score">0</div>
+      </div>
+      <div class="info-box">
+        <div class="label">BEST</div>
+        <div class="value" id="best">0</div>
+      </div>
+      <div class="info-box">
+        <div class="label">LINES</div>
+        <div class="value" id="lines">0</div>
+      </div>
+      <div class="info-box" id="hold-box">
+        <div class="label">HOLD</div>
+        <canvas id="hold-canvas" width="100" height="100"></canvas>
+      </div>
+    </div>
+
+    <!-- 게임 보드 -->
+    <div class="board-wrap">
+      <canvas id="board" width="300" height="600"></canvas>
+
+      <!-- 오버레이 -->
+      <div class="overlay" id="overlay">
+        <div class="overlay-content">
+          <div class="overlay-title" id="overlay-title">TETRIS</div>
+          <div class="overlay-sub" id="overlay-sub">블록을 쌓아 라인을 없애세요</div>
+          <button class="start-btn" id="start-btn" onclick="startGame()">START</button>
+        </div>
+      </div>
+
+      <!-- 레벨업 알림 -->
+      <div class="levelup-notify" id="levelup-notify"></div>
+    </div>
+
+    <!-- 왼쪽 패널 하단: HOLD -->
+    <!-- HOLD 박스는 왼쪽 패널에 추가 -->
+
+    <!-- 오른쪽 패널 -->
+    <div class="side-panel right">
+      <div class="info-box">
+        <div class="label">NEXT</div>
+        <canvas id="next-canvas" width="100" height="100"></canvas>
+      </div>
+      <div class="info-box">
+        <div class="label">LEVEL</div>
+        <div class="value level-value" id="level">1</div>
+        <div class="level-bar-wrap">
+          <div class="level-bar" id="level-bar"></div>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="label">CONTROLS</div>
+        <div class="key-row"><kbd>←→</kbd> 이동</div>
+        <div class="key-row"><kbd>↑</kbd> 회전</div>
+        <div class="key-row"><kbd>↓</kbd> 빠르게</div>
+        <div class="key-row"><kbd>Space</kbd> 즉시 낙하</div>
+        <div class="key-row"><kbd>Shift</kbd> 홀드</div>
+        <div class="key-row"><kbd>P</kbd> 일시정지</div>
+      </div>
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
