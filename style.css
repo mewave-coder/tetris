@@ -19,7 +19,7 @@ body {
   gap: 16px;
 }
 
-/* ── Side Panels ── */
+/* ���� Side Panels ���� */
 .side-panel {
   width: 120px;
   display: flex;
@@ -76,7 +76,7 @@ body {
   transition: width 0.3s ease;
 }
 
-/* ── Controls ── */
+/* ���� Controls ���� */
 .controls {
   background: linear-gradient(160deg, #1e1e32 0%, #16162a 100%);
   border: 1px solid rgba(255,255,255,0.07);
@@ -106,7 +106,7 @@ kbd {
   font-family: inherit;
 }
 
-/* ── Next / Hold Canvas ── */
+/* ���� Next / Hold Canvas ���� */
 #next-canvas,
 #hold-canvas {
   display: block;
@@ -119,12 +119,12 @@ kbd {
 }
 
 #hold-box.used .label::after {
-  content: ' (사용됨)';
+  content: ' (�ъ슜��)';
   font-size: 8px;
   color: #444466;
 }
 
-/* ── Board ── */
+/* ���� Board ���� */
 .board-wrap {
   position: relative;
   line-height: 0;
@@ -140,7 +140,7 @@ kbd {
     0 0 60px rgba(80,80,180,0.1);
 }
 
-/* ── Overlay ── */
+/* ���� Overlay ���� */
 .overlay {
   position: absolute;
   inset: 0;
@@ -201,7 +201,7 @@ kbd {
     0 2px 8px rgba(100,100,255,0.3);
 }
 
-/* ── Level Up Notify ── */
+/* ���� Level Up Notify ���� */
 .levelup-notify {
   position: absolute;
   top: 50%;
@@ -231,4 +231,52 @@ kbd {
   40%  { transform: translate(-50%, -50%) scale(1); }
   70%  { opacity: 1; }
   100% { opacity: 0; transform: translate(-50%, -60%) scale(1); }
+}
+
+/* ���� �곗튂 �뚰듃 (紐⑤컮�� �꾩슜) ���� */
+.touch-hints {
+  display: none;
+}
+
+/* ���� 紐⑤컮�� 諛섏쓳�� ���� */
+@media (max-width: 480px) {
+  html, body {
+    overflow: hidden;
+    height: 100%;
+  }
+  body {
+    align-items: flex-start;
+    padding-top: max(env(safe-area-inset-top), 8px);
+  }
+  .wrapper {
+    zoom: 0.65;
+    gap: 12px;
+  }
+  /* �ㅻ낫�� 而⑦듃濡� �덈궡�� 紐⑤컮�쇱뿉�� �④� */
+  .controls {
+    display: none;
+  }
+  /* �곗튂 �뚰듃 �쒖떆 */
+  .touch-hints {
+    display: block;
+    background: linear-gradient(160deg, #1e1e32 0%, #16162a 100%);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 4px 12px rgba(0,0,0,0.4);
+  }
+  .touch-hints .label {
+    margin-bottom: 8px;
+  }
+  .touch-row {
+    font-size: 11px;
+    color: #7070a0;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .touch-icon {
+    font-size: 13px;
+  }
 }
